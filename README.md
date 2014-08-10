@@ -25,5 +25,6 @@ bugs:
 	-# right after a command does not work properly
 		-for example (ls# -a) will not execute ls
 	-when "exit" is typed, sometimes it will need to be typed twice, but it will still exit
+	
 =======
 >>>>>>> 530f68e4815a4d19902652cb2f6fda19ef4f6c7b

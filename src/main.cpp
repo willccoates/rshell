@@ -68,6 +68,7 @@ void executeCommands(char** in, bool ampersand)
 int main()
 {
 	string line;
+
 	vector<string> parsevec;
 	bool ampersandPresent = false;
 	cout << "$ ";
