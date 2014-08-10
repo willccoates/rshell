@@ -73,20 +73,18 @@ int main()
 	cout << "$ ";
 	while(getline(cin,line))
 	{
-		cout << endl;
 		if(line == "exit"/* || line == "Exit"*/)
-		{
+		{	
 			exit(0);
 		}
 		else
 		{
-			for(unsigned int i = 0; i < line.size(); ++i)
-			{
+			for(unsigned int i = 0; i < line.size(); ++i)						{
 				//fix this to stop when # key is found
 				if(line.at(i) == '#')
 				{
 					line.at(i) = '\0';
-				}
+				}	
 				if(line.at(i) == '&')
 				{
 					ampersandPresent = true;
@@ -94,8 +92,7 @@ int main()
 				}
 			}
 			WordParcing(line, parsevec);
-			char ** usrIn = new char*[parsevec.size()+1];
-			for(unsigned int i = 0; i <= parsevec.size(); ++i)
+			char ** usrIn = new char*[parsevec.size()+1];						for(unsigned int i = 0; i <= parsevec.size(); ++i)
 			{
 				if(i == parsevec.size())
 					usrIn[i] = '\0';
@@ -103,7 +100,7 @@ int main()
 				{
 					usrIn[i] = new char[parsevec.at(i).size()+1];
 					strcpy(usrIn[i],parsevec.at(i).c_str());
-				}
+				}	
 			}
 			executeCommands(usrIn,ampersandPresent);
 //			cout << line << endl;
