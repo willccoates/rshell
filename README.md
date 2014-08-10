@@ -16,7 +16,8 @@ general:
 	-for more features view the /bin page on your computer
 
 how to run:
-	-to run you just need to type make, this will build, compile and run the program
+	-type make, this will build and compile the program
+	-to run, type bin/rshell
 	-to clean the file, you type make clean and this will discard executibles and object files
 
 bugs:
