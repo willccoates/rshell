@@ -91,6 +91,33 @@ void lFlagLs()
 					cout << 'x';
 				else
 					cout << '-';
+				
+				if(s.st_mode & S_IRGRP)
+					cout << 'r';
+				else
+					cout << '-';
+				if(s.st_mode & S_IWGRP)
+					cout << 'w';
+				else
+					cout << '-';
+				if(s.st_mode & S_IXGRP)
+					cout << 'x';
+				else
+					cout << '-';
+				
+
+				if(s.st_mode & S_IROTH)
+					cout << 'r';
+				else
+					cout << '-';
+				if(s.st_mode & S_IWOTH)
+					cout << 'w';
+				else
+					cout << '-';
+				if(s.st_mode & S_IXOTH)
+					cout << 'x';
+				else
+					cout << '-';
 				cout << " " << direntp->d_name; 
 				cout << endl;
 			}
