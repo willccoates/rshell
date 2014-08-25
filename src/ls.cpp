@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <sys/stat.h>
 #include <stdio.h>
+#include <pwd.h>
 
 using namespace std;
 
@@ -118,7 +119,11 @@ void lFlagLs()
 					cout << 'x';
 				else
 					cout << '-';
-				cout << " " << direntp->d_name; 
+				cout << " " << getpwuid(s.st_uid);
+				cout << " " << getuid();
+				cout << " " << s.st_size;
+				cout << " " << s.st_atime;
+				cout << " " << direntp->d_name;
 				cout << endl;
 			}
 		}
