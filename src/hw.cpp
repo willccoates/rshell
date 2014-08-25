@@ -92,92 +92,96 @@ int main()
 	{
 		cout << "$ ";
 		getline(cin, input);
-		if(SIG_ERR == signal(SIGINT,changec))
-			perror("signal failed");
-		if(input == "exit")
-			break;
-		stringParse(input, strvec);
-		for(unsigned int i = 0; i < strvec.size(); ++i)
+		if(input != "")
 		{
-			if(strvec.at(i) == "&")
-				amper = true;
-			if(strvec.at(i) == "#")
-				strvec.erase(strvec.begin()+i,strvec.end());
-
-		}
-
-		char **usrIn = new char *[strvec.size()+1];
-		for(unsigned int i = 0; i < strvec.size(); ++i)
-		{
-			usrIn[i] = new char[strvec.at(i).size()+1];
-			strcpy(usrIn[i], strvec.at(i).c_str());
-		}
-		usrIn[strvec.size()] = '\0';
-		if(strcmp(usrIn[0],cd.c_str()) == 0)
-		{
-			char *abpath = new char[1024];
-			if(usrIn[1] != NULL)
+			if(SIG_ERR == signal(SIGINT,changec))
+				perror("signal failed");
+		
+			if(input == "exit")
+				exit(1);
+			stringParse(input, strvec);
+			for(unsigned int i = 0; i < strvec.size(); ++i)
 			{
-				if(getcwd(abpath,1024) == NULL)
-					perror("getcwd failed");
-				strcat(abpath,"/");
-				strcat(abpath,usrIn[1]);
-				cout << abpath << endl;
-				if(chdir(abpath) == -1)
-					perror("directory change failed");
+				if(strvec.at(i) == "&")
+					amper = true;
+				if(strvec.at(i) == "#")
+					strvec.erase(strvec.begin()+i,strvec.end());
+
+			}	
+
+			char **usrIn = new char *[strvec.size()+1];
+			for(unsigned int i = 0; i < strvec.size(); ++i)
+			{
+				usrIn[i] = new char[strvec.at(i).size()+1];
+				strcpy(usrIn[i], strvec.at(i).c_str());
+			}
+			usrIn[strvec.size()] = '\0';
+			if(strcmp(usrIn[0],cd.c_str()) == 0)
+			{
+				char *abpath = new char[1024];
+				if(usrIn[1] != NULL)
+				{
+					if(getcwd(abpath,1024) == NULL)
+						perror("getcwd failed");
+					strcat(abpath,"/");
+					strcat(abpath,usrIn[1]);
+					cout << abpath << endl;
+					if(chdir(abpath) == -1)
+						perror("directory change failed");
+				}
+				else
+				{
+					char *home = getenv("HOME");
+					if(home == NULL)
+						perror("getenv failed");
+//				cout << home << endl;
+					if(chdir(home) == -1)
+						perror("directory change failed");
+				}
 			}
 			else
 			{
-				char *home = getenv("HOME");
-				if(home == NULL)
-					perror("getenv failed");
-//				cout << home << endl;
-				if(chdir(home) == -1)
-					perror("directory change failed");
-			}
-		}
-		else
-		{
 
-			parsepath(temp,pathvec);
+				parsepath(temp,pathvec);
 
-			for(unsigned int i = 0; i < pathvec.size(); ++i)
-			{
-				char buf[1024];
-				strcpy(buf,pathvec.at(i).c_str());
-				buf[pathvec.at(i).size()+1] = '\0';
-				concatstrpath = strncat(buf,"/",1024);
-				concatstrpath2 = strncat(concatstrpath, usrIn[0],1024);
-				concatpath.push_back(concatstrpath2);	
+				for(unsigned int i = 0; i < pathvec.size(); ++i)
+				{
+					char buf[1024];
+					strcpy(buf,pathvec.at(i).c_str());
+					buf[pathvec.at(i).size()+1] = '\0';
+					concatstrpath = strncat(buf,"/",1024);
+					concatstrpath2 = strncat(concatstrpath, usrIn[0],1024);
+					concatpath.push_back(concatstrpath2);	
 			
 
-				if((openInt = open(concatpath.at(i).c_str(), O_RDONLY)) != -1)
+					if((openInt = open(concatpath.at(i).c_str(), O_RDONLY)) != -1)
+					{
+						correctpath = concatpath.at(i);
+						break;
+					}
+				}	
+				if(openInt == -1)
+					perror("open failed");
+				char **fin = new char *[1024];		
+				unsigned int j;
+				for(j = 0; usrIn[j] != '\0'; ++j)
 				{
-					correctpath = concatpath.at(i);
-					break;
+					fin[j] = new char[1024];
+					strcpy(fin[j],usrIn[j]);
 				}
+				fin[j] = '\0';
+				executeCommands(correctpath.c_str(), fin, amper);
+				delete [] fin;
 			}
-			if(openInt == -1)
-				perror("open failed");
-			char **fin = new char *[1024];		
-			unsigned int j;
-			for(j = 0; usrIn[j] != '\0'; ++j)
-			{
-				fin[j] = new char[1024];
-				strcpy(fin[j],usrIn[j]);
-			}
-			fin[j] = '\0';
-			executeCommands(correctpath.c_str(), fin, amper);
-			delete [] fin;
+			for(unsigned int i = 0; i < strvec.size(); ++i)
+				delete usrIn[i];
+			strvec.clear();
+			delete [] usrIn;
+			input = "";
+			correctpath = "";
+			pathvec.clear();
+			concatpath.clear();
 		}
-		for(unsigned int i = 0; i < strvec.size(); ++i)
-			delete usrIn[i];
-		strvec.clear();
-		delete [] usrIn;
-		input = "";
-		correctpath = "";
-		pathvec.clear();
-		concatpath.clear();
 	}
 		
 }
