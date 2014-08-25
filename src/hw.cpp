@@ -64,6 +64,12 @@ void parsepath(char *path, vector<string> &p)
 		
 }
 
+void changec(int i)
+{
+	signal(SIGINT,SIG_IGN);
+	cout << endl;
+}
+
 int main()
 {
 	string input;
@@ -86,7 +92,8 @@ int main()
 	{
 		cout << "$ ";
 		getline(cin, input);
-//		if(SIG_ERR == sigaction(,))
+		if(SIG_ERR == signal(SIGINT,changec))
+			perror("signal failed");
 		if(input == "exit")
 			break;
 		stringParse(input, strvec);
