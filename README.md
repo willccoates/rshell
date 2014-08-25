@@ -13,12 +13,18 @@ general:
 	-exit -typing exit will kill the program
 	-rm -removes a file
 	-rmdir -removes a directory
+	-cd -changes the working directory
+		-cd ..(changes to one directory back in the path)
+		-cd (changes to home directory)
+		-cd [directory name] (changes to that directory)
 	-for more features view the /bin page on your computer
 
 UPDATE:
-	-the ls command has now been written
+(1)	-the ls command has now been written
 		-ls can take the parameters [no parameters],[-a],[-l],[-R] and any combination on them all
 		-ls can also take file names which will output the contents inside the files or directories
+(2) -the cd(change directory) command is now working properly
+	-^c does not kill the whole program, just kills program running inside rshell
 
 how to run rshell:
 	-type make, this will build and compile the program
@@ -36,5 +42,7 @@ bugs:
 	-when "exit" is typed, sometimes it will need to be typed twice, but it will still exit
 	-ls -al does not work properly and all other forms of combinations
 	-ls -R does not work at all
+	-can not run files that are in working directory(such as ./a.out)
+	
 =======
 >>>>>>> 530f68e4815a4d19902652cb2f6fda19ef4f6c7b

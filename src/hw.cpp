@@ -12,6 +12,7 @@
 #include <sys/param.h>
 #include <stdlib.h>
 #include <cstdlib>
+#include <dirent.h>
 
 using namespace std;
 
@@ -70,6 +71,8 @@ void changec(int i)
 	cout << endl;
 }
 
+
+
 int main()
 {
 	string input;
@@ -90,7 +93,10 @@ int main()
 
 	while(1)
 	{
-		cout << "$ ";
+		char *buf = new char[1024];
+		if(getcwd(buf,1024) == NULL)
+			perror("getcwd failed");
+		cout << buf << "$ ";
 		getline(cin, input);
 		if(input != "")
 		{
@@ -99,6 +105,7 @@ int main()
 		
 			if(input == "exit")
 				exit(1);
+			
 			stringParse(input, strvec);
 			for(unsigned int i = 0; i < strvec.size(); ++i)
 			{
@@ -125,7 +132,6 @@ int main()
 						perror("getcwd failed");
 					strcat(abpath,"/");
 					strcat(abpath,usrIn[1]);
-					cout << abpath << endl;
 					if(chdir(abpath) == -1)
 						perror("directory change failed");
 				}
