@@ -1,0 +1,108 @@
+Script started on Mon 25 Aug 2014 05:26:34 PM PDT
+]0;william@william-Inspiron-N5110: ~/cs100/hw12/rshell/testswilliam@william-Inspiron-N5110:~/cs100/hw12/rshell/tests$ cd ..
+]0;william@william-Inspiron-N5110: ~/cs100/hw12/rshellwilliam@william-Inspiron-N5110:~/cs100/hw12/rshell$ make
+g++ -Wall -Werror -ansi -pedantic src/hw.cpp -o ./bin/rshell
+g++ -Wall -Werror -ansi -pedantic src/ls.cpp -o ./bin/ls
+]0;william@william-Inspiron-N5110: ~/cs100/hw12/rshellwilliam@william-Inspiron-N5110:~/cs100/hw12/rshell$ bin/rshell
+/home/william/cs100/hw12/rshell$ ls
+bin  LICENSE  Makefile	README.md  src	tests
+/home/william/cs100/hw12/rshell$ ls -a
+.  ..  bin  .git  LICENSE  Makefile  README.md	src  tests
+/home/william/cs100/hw12/rshell$ ls -l
+total 24
+drwxrwxr-x 2 william william 4096 Aug 25 17:26 bin
+-rw-rw-r-- 1 william william 1472 Aug 10 09:50 LICENSE
+-rw-rw-r-- 1 william william  246 Aug 25 13:19 Makefile
+-rw-rw-r-- 1 william william 2023 Aug 25 16:58 README.md
+drwxrwxr-x 2 william william 4096 Aug 25 17:23 src
+drwxrwxr-x 2 william william 4096 Aug 25 17:26 tests
+/home/william/cs100/hw12/rshell$ ls -R
+.:
+bin  LICENSE  Makefile	README.md  src	tests
+
+./bin:
+ls  rshell
+
+./src:
+a.out  hw1.cpp	hw.cpp	ls.cpp	test.cpp
+
+./tests:
+exec.script  hw4.script  ls.script
+/home/william/cs100/hw12/rshell$ ls -al
+total 36
+drwxrwxr-x 6 william william 4096 Aug 25 16:58 .
+drwxrwxr-x 3 william william 4096 Aug  7 12:43 ..
+drwxrwxr-x 2 william william 4096 Aug 25 17:26 bin
+drwxrwxr-x 8 william william 4096 Aug 25 16:59 .git
+-rw-rw-r-- 1 william william 1472 Aug 10 09:50 LICENSE
+-rw-rw-r-- 1 william william  246 Aug 25 13:19 Makefile
+-rw-rw-r-- 1 william william 2023 Aug 25 16:58 README.md
+drwxrwxr-x 2 william william 4096 Aug 25 17:23 src
+drwxrwxr-x 2 william william 4096 Aug 25 17:26 tests
+/home/william/cs100/hw12/rshell$ ls -la
+total 36
+drwxrwxr-x 6 william william 4096 Aug 25 16:58 .
+drwxrwxr-x 3 william william 4096 Aug  7 12:43 ..
+drwxrwxr-x 2 william william 4096 Aug 25 17:26 bin
+drwxrwxr-x 8 william william 4096 Aug 25 16:59 .git
+-rw-rw-r-- 1 william william 1472 Aug 10 09:50 LICENSE
+-rw-rw-r-- 1 william william  246 Aug 25 13:19 Makefile
+-rw-rw-r-- 1 william william 2023 Aug 25 16:58 README.md
+drwxrwxr-x 2 william william 4096 Aug 25 17:23 src
+drwxrwxr-x 2 william william 4096 Aug 25 17:26 tests
+/home/william/cs100/hw12/rshell$ ls  cat Makefile
+all: bin rshell ls 
+bin:
+	[ ! -d bin ] && mkdir bin
+rshell:
+	g++ -Wall -Werror -ansi -pedantic src/hw.cpp -o ./bin/rshell
+ls:
+	g++ -Wall -Werror -ansi -pedantic src/ls.cpp -o ./bin/ls
+cp:
+	g++ -Wall -Werror -ansi -pedantic src/cp.cpp -o ./bin/cp
+/home/william/cs100/hw12/rshell$ echo hello
+hello
+/home/william/cs100/hw12/rshell$ #testing cd
+open failed: No such file or directory
+execv failed: No such file or directory
+wait failed: No child processes
+/home/william/cs100/hw12/rshell$ cd .
+/home/william/cs100/hw12/rshell$ cd ..
+/home/william/cs100/hw12$ cd
+/home/william$ ls
+a.out	 Documents	   main.cpp  Pictures  rshell	  testhw
+cs100	 Downloads	   Music     Public    Templates  tests
+Desktop  examples.desktop  $MYVIMRC  quiz      testfile   Videos
+/home/william$ cd cs100
+/home/william/cs100$ cd hw     ls
+a.out	    hw1   hw3  lab2	 main.cpp    partnersrepo  ucr-cs100
+cstringlab  hw12  hw5  lectures  messaround  quiz2.odt
+/home/william/cs100$ cd gw12    hw12
+/home/william/cs100/hw12$ ls
+rshell
+/home/william/cs100/hw12$ cd rshell
+/home/william/cs100/hw12/rshell$ ls
+bin  LICENSE  Makefile	README.md  src	tests
+/home/william/cs100/hw12/rshell$ ca  cat /dev/ranr dom/
+cat: /dev/random/: Not a directory
+/home/william/cs100/hw12/rshell$ cat /dev/random
+A8∞Öwﬂa=˙j∑ê‡ÖUfäsP‰˚Úg;æπV∞	—ãñ¨)ˆc˙ƒ;9U∞µü˚vëx•wˆd[≥Ë6n°rŒÛäˆ°p2_¿”Ù À∆√5º˛v°Çëc⁄¨ØÅ˙%0@ãO=Âv…{ c¯^^C
+
+/home/william/cs100/hw12/rshell$ cat
+hello
+hello
+bye
+bye
+end
+end
+^C
+/home/william/cs100/hw12/rshell$ ^C
+/home/william/cs100/hw12/rshell$ ^C
+/home/william/cs100/hw12/rshell$ ^C
+/home/william/cs100/hw12/rshell$ ^C
+/home/william/cs100/hw12/rshell$ exit
+/home/william/cs100/hw12/rshell$ exit
+]0;william@william-Inspiron-N5110: ~/cs100/hw12/rshellwilliam@william-Inspiron-N5110:~/cs100/hw12/rshell$ exit
+exit
+
+Script done on Mon 25 Aug 2014 05:29:27 PM PDT

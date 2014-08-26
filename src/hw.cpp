@@ -36,7 +36,7 @@ void executeCommands(const char *path, char** in, bool ampersand)
 	if(pid == 0)
 	{
 		if(-1 == execv(path, in))
-			perror("exevp failed");
+			perror("execv failed");
 	}
 	if(!ampersand)
 	{
@@ -107,6 +107,7 @@ int main()
 				exit(1);
 			
 			stringParse(input, strvec);
+
 			for(unsigned int i = 0; i < strvec.size(); ++i)
 			{
 				if(strvec.at(i) == "&")
@@ -123,6 +124,7 @@ int main()
 				strcpy(usrIn[i], strvec.at(i).c_str());
 			}
 			usrIn[strvec.size()] = '\0';
+
 			if(strcmp(usrIn[0],cd.c_str()) == 0)
 			{
 				char *abpath = new char[1024];
