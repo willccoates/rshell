@@ -69,7 +69,15 @@ void changec(int i)
 {
 	signal(SIGINT,SIG_IGN);
 	cout << endl;
+	cout << flush;
 }
+
+//void changez(int i)
+//{
+//	signal(SIGSTOP,SIG_DFL);
+//	cout << endl;
+//	cout << flush;
+//}
 
 
 
@@ -90,18 +98,24 @@ int main()
 	string correctpath;
 	int openInt = 0;
 	string cd = "cd";
-
+	char *usrName = new char[1024];
+	char *hostName = new char[1024];
+	getlogin_r(usrName,1024);
+	gethostname(hostName,1024);
 	while(1)
 	{
 		char *buf = new char[1024];
 		if(getcwd(buf,1024) == NULL)
 			perror("getcwd failed");
-		cout << buf << "$ ";
+		cout << buf << endl;
+		cout << usrName << "@" << hostName << "$ ";
 		getline(cin, input);
 		if(input != "")
 		{
 			if(SIG_ERR == signal(SIGINT,changec))
 				perror("signal failed");
+		//	if(SIG_ERR == signal(SIGTSTP,changez))
+		//		perror("signal failed");
 		
 			if(input == "exit")
 				exit(1);
@@ -149,7 +163,11 @@ int main()
 			}
 			else
 			{
-
+				char *curr = new char[1024];
+				if(getcwd(curr,1024) == NULL)
+					perror("getcwd failed");
+				string str(curr);
+				pathvec.push_back(str);
 				parsepath(temp,pathvec);
 
 				for(unsigned int i = 0; i < pathvec.size(); ++i)
@@ -190,6 +208,7 @@ int main()
 			pathvec.clear();
 			concatpath.clear();
 		}
+		cout << endl;
 	}
 		
 }
