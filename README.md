@@ -81,4 +81,7 @@ bugs:
 	
 	
  * ls -R does not work at all
+
+ * ls with more than one filename does not work
+ 
 	
