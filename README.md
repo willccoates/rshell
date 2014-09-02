@@ -77,6 +77,8 @@ bugs:
 	
 	 * for example (ls# -a) will not execute ls
 		
+ * "#' does not work before commands
+
  * when "exit" is typed, sometimes it will need to be typed twice, but it will still exit
 	
 	
